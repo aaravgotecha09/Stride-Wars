@@ -1,22 +1,21 @@
-import express from 'express';
-import cors from 'cors';
-import { connectDB } from './db.js';
+import mongoose from 'mongoose';
 
-const app = express();
+export async function connectDB(uri) {
+  if (!uri) {
+    console.warn(
+      '[StrideWars] No MONGODB_URI set — signup/login and persisted XP will not work until it is configured.'
+    );
+    return;
+  }
 
-app.use(cors({
-  origin: process.env.FRONTEND_ORIGIN || '*',
-  credentials: true
-}));
-app.use(express.json());
+  try {
+    await mongoose.connect(uri);
+    console.log('[StrideWars] MongoDB connected successfully');
+  } catch (err) {
+    console.error('[StrideWars] MongoDB connection error:', err.message);
+    process.exit(1);
+  }
 
-const PORT = process.env.PORT || 4000;
-
-// This checks both environment variable names so it never fails to connect
-const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
-
-connectDB(mongoUri).then(() => {
-  app.listen(PORT, () => {
-    console.log(`StrideWars backend listening on :${PORT}`);
-  });
-});
+  mongoose.connection.on('connected', () => console.log('[StrideWars] MongoDB connected'));
+  mongoose.connection.on('error', (err) => console.error('[StrideWars] MongoDB error:', err.message));
+}
