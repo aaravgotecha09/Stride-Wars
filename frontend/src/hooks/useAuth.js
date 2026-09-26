@@ -1,6 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://localhost:4000';
+const BACKEND_URL = import.meta.env.VITE_API_URL || import.meta.env.VITE_BACKEND_URL || 'https://stride-wars.onrender.com';
 const STORAGE_KEY = 'stridewars_token';
 
 export function useAuth() {
