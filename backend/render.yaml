@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: stridewars-backend
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: FRONTEND_ORIGIN
+        value: https://your-frontend.vercel.app

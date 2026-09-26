@@ -1,0 +1,267 @@
+:root {
+  --bg: #0f1712;
+  --panel: #16211a;
+  --line: #2e4234;
+  --text: #e9f0ea;
+  --muted: #8fa396;
+  --accent: #ff7a33;
+  --red: #e4572e;
+  --blue: #2e86ab;
+  --gold: #f2c14e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Inter', sans-serif;
+}
+
+.join-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 122, 51, 0.08), transparent 40%),
+    repeating-linear-gradient(0deg, transparent, transparent 39px, rgba(46, 66, 52, 0.35) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, rgba(46, 66, 52, 0.35) 40px),
+    var(--bg);
+  padding: 24px;
+}
+
+.join-card {
+  max-width: 420px;
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  margin: 0 0 8px;
+}
+
+.join-card h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0 0 16px;
+  line-height: 0.95;
+}
+
+.tagline {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 0 0 32px;
+  max-width: 34ch;
+}
+
+.join-card form {
+  display: flex;
+  gap: 10px;
+}
+
+.join-card input {
+  flex: 1;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  color: var(--text);
+  padding: 12px 14px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.join-card input:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.join-card button {
+  background: var(--accent);
+  border: none;
+  color: #17110a;
+  font-weight: 600;
+  padding: 12px 22px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.join-card button:hover {
+  filter: brightness(1.08);
+}
+
+.join-note {
+  margin-top: 18px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  grid-template-rows: auto 1fr;
+  gap: 16px;
+  padding: 16px;
+}
+
+.map-wrap {
+  grid-column: 1;
+  grid-row: 2;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  max-height: calc(100vh - 140px);
+}
+
+.game-map {
+  display: block;
+}
+
+.zone-cell {
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.zone-cell:hover {
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.hud {
+  grid-column: 1 / span 2;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 12px 20px;
+  flex-wrap: wrap;
+  gap: 10px;
+  position: relative;
+}
+
+.hud-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.hud-stats {
+  display: flex;
+  gap: 24px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  color: var(--muted);
+  flex-wrap: wrap;
+}
+
+.hud-stats b {
+  color: var(--text);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.status-dot.on {
+  background: #6fcf97;
+}
+
+.status-dot.off {
+  background: #e4572e;
+}
+
+.flag-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #3a1f14;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 10px 16px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  z-index: 10;
+}
+
+.leaderboard {
+  grid-column: 2;
+  grid-row: 2;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.leaderboard h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 18px;
+  margin: 0 0 12px;
+}
+
+.team-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+}
+
+.team-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.player-row {
+  display: flex;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+
+.player-row.me {
+  color: var(--accent);
+}
+
+@media (max-width: 720px) {
+  .app-shell {
+    grid-template-columns: 1fr;
+  }
+  .leaderboard {
+    grid-column: 1;
+    grid-row: 3;
+  }
+  .hud {
+    grid-column: 1;
+  }
+  .join-card h1 {
+    font-size: 48px;
+  }
+}
