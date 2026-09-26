@@ -30,10 +30,11 @@ import {
 const PORT = process.env.PORT || 4000;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || '*';
 
-await connectDB(process.env.MONGODB_URI);
+// Support both MONGO_URI and MONGODB_URI seamlessly
+const mongoUri = process.env.MONGO_URI || process.env.MONGODB_URI;
 
 const app = express();
-app.use(cors({ origin: FRONTEND_ORIGIN }));
+app.use(cors({ origin: FRONTEND_ORIGIN, credentials: true }));
 app.use(express.json());
 app.use('/auth', authRouter);
 
@@ -230,4 +231,10 @@ setInterval(() => runTick(io), TICK_MS);
 app.get('/health', (_req, res) => res.json({ ok: true, players: players.size }));
 app.get('/leaderboard', (_req, res) => res.json(leaderboard()));
 
-server.listen(PORT, () => console.log(`StrideWars backend listening on :${PORT}`));
+// Connect to Database and start server
+connectDB(mongoUri).then(() => {
+  server.listen(PORT, () => console.log(`StrideWars backend listening on :${PORT}`));
+}).catch((err) => {
+  console.error('[StrideWars] Failed to connect to MongoDB:', err.message);
+  process.exit(1);
+});
